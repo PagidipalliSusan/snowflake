@@ -227,4 +227,4 @@ FIELD_DELIMITER = ',';
 
 
 --15: unloading the data
-create external stage and use copy into command.
+create external stage and use get command to unload the data.
