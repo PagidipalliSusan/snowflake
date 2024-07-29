@@ -10,8 +10,8 @@ TYPE = 'JSON';
 
 CREATE OR REPLACE STAGE my_S3_stage
   URL='s3://asg3-bucket/json-folder/'
-  CREDENTIALS=(AWS_KEY_ID='AKIA4ZZBL637F77WD7B4' 
-                AWS_SECRET_KEY='hNFsomm+BK7YLPXrsHhtvAVI3tviDhJ/+Jz0hivn')
+  CREDENTIALS=(AWS_KEY_ID='***************************' 
+                AWS_SECRET_KEY='**********************************')
   FILE_FORMAT = (FORMAT_NAME = 'json_format');
 
   list @my_S3_stage;
@@ -265,36 +265,3 @@ $$;
 
 CALL PERSON_MASTER_PROCEDURE();
 
-
-
-
-
-
-
-
-
-    var sql_insert_location = `
-        INSERT INTO PERSON_LOCATION (NAME, LOCATION)
-        SELECT NAME, LOCATION
-        FROM PERSON_MASTER
-        WHERE LOCATION IS NOT NULL
-    `;
-
-    var sql_insert_age = `
-        INSERT INTO PERSON_AGE (NAME, AGE)
-        SELECT NAME, AGE
-        FROM PERSON_MASTER
-        WHERE AGE IS NOT NULL
-    `;
-
-    var stmt1 = snowflake.createStatement({sqlText: sql_unset_person_master});
-    stmt1.execute();
-
-    var stmt2 = snowflake.createStatement({sqlText: sql_insert_location});
-    stmt2.execute();
-    
-    var stmt3 = snowflake.createStatement({sqlText: sql_insert_age});
-    stmt3.execute();
-
-    return "Data successfully loaded into PERSON_MASTER, PERSON_LOCATION, and PERSON_AGE tables.";
-$$;
